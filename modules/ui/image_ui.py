@@ -113,3 +113,23 @@ class ImageUI:
                 st.write(f"Standard Deviation: {std_dev:.2f}")
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
+                
+    def display_task3_frequency_operations(self, frequency_processor):
+        st.header("Task 3: Convolution & Frequency Operations")
+        uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="task3_frequency_upload")
+        operation = st.selectbox("Select Operation", ["convolution", "padding", "filter", "fourier", "noise_reduction"])
+        param = None
+        if operation == "convolution":
+            param = st.selectbox("Select Kernel Type", ["average", "sharpen", "edge"], key="task3_convolution_kernel")
+        elif operation == "padding":
+            param = st.number_input("Padding Size", min_value=1, max_value=100, value=10, step=1, key="task3_padding_size")
+        elif operation == "filter":
+            param = st.selectbox("Select Filter Type", ["low", "high", "band"], key="task3_filter_type")
+        if uploaded_file is not None and st.button("Process", key="task3_process_button"):
+            try:
+                image_data = uploaded_file.read()
+                processed_img = frequency_processor.process_frequency_operation(image_data, operation, param)
+                st.image(image_data, caption="Original Image", use_container_width=True)
+                st.image(processed_img, caption="Processed Image", use_container_width=True)
+            except Exception as e:
+                st.error(f"Error processing image: {str(e)}")
