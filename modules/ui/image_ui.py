@@ -11,7 +11,7 @@ class ImageUI:
                 image_data = uploaded_file.read()
                 rgb_array = image_processor.process_image(image_data)
                 
-                st.image(image_data, caption="Uploaded Image", use_column_width=True)
+                st.image(image_data, caption="Uploaded Image", use_container_width=True)
                 st.write("RGB Channel Arrays:")
                 st.json(rgb_array)
             except Exception as e:
