@@ -6,6 +6,7 @@ from modules.processing.frequency_processor import FrequencyProcessor
 from modules.processing.face_processor import FaceProcessor
 from modules.processing.shape_processor import ShapeProcessor
 from modules.processing.compression_processor import CompressionProcessor
+from modules.processing.cbir_processor import CbirProcessor
 
 class StreamlitApp:
     def __init__(self):
@@ -26,7 +27,10 @@ class StreamlitApp:
             "Task 5: Integral Projection (Default)": self.run_task5_integral_projection_default,
             "Task 5: Integral Projection (Otsu)": self.run_task5_integral_projection_otsu,
             "Task 6: JPEG Compression": self.run_task6_jpeg_compression,
-            "Task 6: PNG Compression": self.run_task6_png_compression
+            "Task 6: PNG Compression": self.run_task6_png_compression,
+            "Task 7: CBIR": self.run_task7_cbir,
+            "Task 7: Color Space Analysis": self.run_task7_color_space_analysis,
+            "Task 7: Texture Analysis": self.run_task7_texture_analysis
         }
         self.image_ui = ImageUI()
         self.rgb_processor = RGBProcessor()
@@ -35,6 +39,7 @@ class StreamlitApp:
         self.face_processor = FaceProcessor()
         self.shape_processor = ShapeProcessor()
         self.compression_processor = CompressionProcessor()
+        self.cbir_processor = CbirProcessor()
 
     def run_task1_rgb_split(self):
         self.image_ui.display_task1_rgb_split(self.rgb_processor)
@@ -86,6 +91,15 @@ class StreamlitApp:
 
     def run_task6_png_compression(self):
         self.image_ui.display_task6_png_compression(self.compression_processor)
+
+    def run_task7_cbir(self):
+        self.image_ui.display_task7_cbir(self.cbir_processor)
+
+    def run_task7_color_space_analysis(self):
+        self.image_ui.display_task7_color_space_analysis(self.cbir_processor)
+
+    def run_task7_texture_analysis(self):
+        self.image_ui.display_task7_texture_analysis(self.cbir_processor)
 
     def run(self):
         st.sidebar.title("Navigation")

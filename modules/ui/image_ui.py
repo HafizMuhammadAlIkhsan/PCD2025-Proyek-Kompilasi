@@ -14,7 +14,7 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 rgb_array = rgb_processor.process_rgb_split(image_data)
-                st.image(image_data, caption="Uploaded Image", use_column_width=True)
+                st.image(image_data, caption="Uploaded Image", use_container_width=True)
                 st.write("RGB Channel Arrays:")
                 st.json(rgb_array)
             except Exception as e:
@@ -29,8 +29,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 result_img = advanced_processor.process_arithmetic_operation(image_data, operation, value)
-                st.image(image_data, caption="Original Image", use_column_width=True)
-                st.image(result_img, caption="Modified Image", use_column_width=True)
+                st.image(image_data, caption="Original Image", use_container_width=True)
+                st.image(result_img, caption="Modified Image", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -44,10 +44,10 @@ class ImageUI:
                 image_data1 = uploaded_file1.read()
                 image_data2 = uploaded_file2.read() if uploaded_file2 else None
                 result_img = advanced_processor.process_logic_operation(image_data1, image_data2, operation)
-                st.image(image_data1, caption="First Image", use_column_width=True)
+                st.image(image_data1, caption="First Image", use_container_width=True)
                 if image_data2:
-                    st.image(image_data2, caption="Second Image", use_column_width=True)
-                st.image(result_img, caption="Result Image", use_column_width=True)
+                    st.image(image_data2, caption="Second Image", use_container_width=True)
+                st.image(result_img, caption="Result Image", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -58,8 +58,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 gray_img = advanced_processor.process_grayscale_conversion(image_data)
-                st.image(image_data, caption="Original Image", use_column_width=True)
-                st.image(gray_img, caption="Grayscale Image", use_column_width=True)
+                st.image(image_data, caption="Original Image", use_container_width=True)
+                st.image(gray_img, caption="Grayscale Image", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -70,9 +70,9 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 grayscale_hist, color_hist = advanced_processor.process_histogram_generation(image_data)
-                st.image(image_data, caption="Uploaded Image", use_column_width=True)
-                st.image(grayscale_hist, caption="Grayscale Histogram", use_column_width=True)
-                st.image(color_hist, caption="Color Histogram", use_column_width=True)
+                st.image(image_data, caption="Uploaded Image", use_container_width=True)
+                st.image(grayscale_hist, caption="Grayscale Histogram", use_container_width=True)
+                st.image(color_hist, caption="Color Histogram", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -83,8 +83,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 equalized_img = advanced_processor.process_histogram_equalization(image_data)
-                st.image(image_data, caption="Original Image", use_column_width=True)
-                st.image(equalized_img, caption="Equalized Image", use_column_width=True)
+                st.image(image_data, caption="Original Image", use_container_width=True)
+                st.image(equalized_img, caption="Equalized Image", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -97,9 +97,9 @@ class ImageUI:
                 image_data = uploaded_file.read()
                 ref_image_data = ref_file.read()
                 specified_img = advanced_processor.process_histogram_specification(image_data, ref_image_data)
-                st.image(image_data, caption="Source Image", use_column_width=True)
-                st.image(ref_image_data, caption="Reference Image", use_column_width=True)
-                st.image(specified_img, caption="Specified Image", use_column_width=True)
+                st.image(image_data, caption="Source Image", use_container_width=True)
+                st.image(ref_image_data, caption="Reference Image", use_container_width=True)
+                st.image(specified_img, caption="Specified Image", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -110,7 +110,7 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 mean, std_dev = advanced_processor.process_image_statistics(image_data)
-                st.image(image_data, caption="Uploaded Image", use_column_width=True)
+                st.image(image_data, caption="Uploaded Image", use_container_width=True)
                 st.write(f"Mean Intensity: {mean:.2f}")
                 st.write(f"Standard Deviation: {std_dev:.2f}")
             except Exception as e:
@@ -131,8 +131,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 processed_img = frequency_processor.process_frequency_operation(image_data, operation, param)
-                st.image(image_data, caption="Original Image", use_column_width=True)
-                st.image(processed_img, caption="Processed Image", use_column_width=True)
+                st.image(image_data, caption="Original Image", use_container_width=True)
+                st.image(processed_img, caption="Processed Image", use_container_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -298,3 +298,85 @@ class ImageUI:
                     st.error(f"Error processing PNG compression: {str(e)}")
         else:
             st.info("Please upload an image for PNG compression analysis.")
+            
+    def display_task7_cbir(self, cbir_processor):
+        st.header("Task 7: Content-Based Image Retrieval (CBIR)")
+        uploaded_file = st.file_uploader("Upload Query Image", type=["jpg", "jpeg", "png"], key="task7_cbir_upload")
+        mode = st.radio("Select Feature Type", ["Color", "Texture", "Combined"], key="task7_cbir_mode")
+        if uploaded_file is not None:
+            with st.spinner("Processing CBIR..."):
+                try:
+                    query_image, similar_images, knn_prediction, max_k = cbir_processor.process_cbir(uploaded_file, mode)
+                    st.image(query_image, caption="Query Image", use_column_width=True)
+                    st.subheader("Most Similar Images")
+                    cols = st.columns(3)
+                    for i, (img, label, score) in enumerate(similar_images[:6]):
+                        with cols[i % 3]:
+                            st.image(img, caption=f"{label} - Score: {score:.2f}", use_column_width=True)
+                    st.subheader("k-NN Prediction")
+                    k = st.slider("Number of Neighbors (k)", 1, max_k, min(3, max_k), key="task7_cbir_k")
+                    prediction = cbir_processor.predict_cbir_knn(uploaded_file, mode, k)
+                    st.success(f"Predicted Label: {prediction}")
+                except Exception as e:
+                    st.error(f"Error processing CBIR: {str(e)}")
+        else:
+            st.info("Please upload a query image to start CBIR.")
+
+    def display_task7_color_space_analysis(self, cbir_processor):
+        st.header("Task 7: Color Space Analysis")
+        uploaded_file = st.file_uploader("Choose Image", type=["jpg", "jpeg", "png"], key="task7_color_space_upload")
+        if uploaded_file is not None:
+            with st.spinner("Processing Color Space Analysis..."):
+                try:
+                    (image_rgb, fig_rgb, image_xyz, fig_xyz, image_lab, fig_lab,
+                     image_ycbcr, fig_ycbcr, image_hsv, fig_hsv, image_yiq,
+                     fig_yiq, fig_lum) = cbir_processor.process_color_space_analysis(uploaded_file)
+                    st.subheader("RGB Color Space")
+                    st.image(image_rgb, caption="Original RGB Image", use_column_width=True)
+                    st.pyplot(fig_rgb)
+                    st.subheader("XYZ Color Space")
+                    st.image(image_xyz, caption="XYZ Image", use_column_width=True)
+                    st.pyplot(fig_xyz)
+                    st.subheader("Lab Color Space")
+                    st.image(image_lab, caption="Lab Image", use_column_width=True)
+                    st.pyplot(fig_lab)
+                    st.subheader("YCbCr Color Space")
+                    st.image(image_ycbcr, caption="YCbCr Image", use_column_width=True)
+                    st.pyplot(fig_ycbcr)
+                    st.subheader("HSV Color Space")
+                    st.image(image_hsv, caption="HSV Image", use_column_width=True)
+                    st.pyplot(fig_hsv)
+                    st.subheader("YIQ Color Space")
+                    st.image(image_yiq, caption="YIQ Image", use_column_width=True, clamp=True)
+                    st.pyplot(fig_yiq)
+                    st.subheader("Luminance Components Comparison")
+                    st.pyplot(fig_lum)
+                except Exception as e:
+                    st.error(f"Error processing color space analysis: {str(e)}")
+        else:
+            st.info("Please upload an image for color space analysis.")
+
+    def display_task7_texture_analysis(self, cbir_processor):
+        st.header("Task 7: Texture Analysis")
+        uploaded_file = st.file_uploader("Choose Image", type=["jpg", "jpeg", "png"], key="task7_texture_analysis_upload")
+        if uploaded_file is not None:
+            with st.spinner("Processing Texture Analysis..."):
+                try:
+                    original_fig, stats_fig, glcm_fig, glcm_df, lbp_fig, gabor_fig, law_fig = cbir_processor.process_texture_analysis(uploaded_file)
+                    st.subheader("Original and Grayscale Image")
+                    st.pyplot(original_fig)
+                    st.subheader("Statistical Texture Features")
+                    st.pyplot(stats_fig)
+                    st.subheader("GLCM Features")
+                    st.dataframe(glcm_df, use_container_width=True)
+                    st.pyplot(glcm_fig)
+                    st.subheader("Local Binary Patterns (LBP)")
+                    st.pyplot(lbp_fig)
+                    st.subheader("Gabor Filters")
+                    st.pyplot(gabor_fig)
+                    st.subheader("Law's Texture Energy")
+                    st.pyplot(law_fig)
+                except Exception as e:
+                    st.error(f"Error processing texture analysis: {str(e)}")
+        else:
+            st.info("Please upload an image for texture analysis.")
