@@ -21,7 +21,7 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
 2. **Struktur Folder Proyek**:
    - Pastikan folder proyek memiliki struktur berikut:
      ```
-     image_processing_app/
+     PCD2025-Proyek-Kompilasi/
      ├── app.py
      ├── data/
      │   ├── cbir_dataset/        # Isi dengan gambar untuk CBIR
