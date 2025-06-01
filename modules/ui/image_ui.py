@@ -1,18 +1,20 @@
 import streamlit as st
 import numpy as np
 import cv2
+import os
 from io import BytesIO
 from PIL import Image
+import time
 
 class ImageUI:
     def display_task1_rgb_split(self, rgb_processor):
-        st.header("Task 1: RGB Split")
+        st.header("Task 1: Image Upload & RGB Split")
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="task1_rgb_upload")
         if uploaded_file is not None:
             try:
                 image_data = uploaded_file.read()
                 rgb_array = rgb_processor.process_rgb_split(image_data)
-                st.image(image_data, caption="Uploaded Image", use_container_width=True)
+                st.image(image_data, caption="Uploaded Image", use_column_width=True)
                 st.write("RGB Channel Arrays:")
                 st.json(rgb_array)
             except Exception as e:
@@ -27,8 +29,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 result_img = advanced_processor.process_arithmetic_operation(image_data, operation, value)
-                st.image(image_data, caption="Original Image", use_container_width=True)
-                st.image(result_img, caption="Modified Image", use_container_width=True)
+                st.image(image_data, caption="Original Image", use_column_width=True)
+                st.image(result_img, caption="Modified Image", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -42,10 +44,10 @@ class ImageUI:
                 image_data1 = uploaded_file1.read()
                 image_data2 = uploaded_file2.read() if uploaded_file2 else None
                 result_img = advanced_processor.process_logic_operation(image_data1, image_data2, operation)
-                st.image(image_data1, caption="First Image", use_container_width=True)
+                st.image(image_data1, caption="First Image", use_column_width=True)
                 if image_data2:
-                    st.image(image_data2, caption="Second Image", use_container_width=True)
-                st.image(result_img, caption="Result Image", use_container_width=True)
+                    st.image(image_data2, caption="Second Image", use_column_width=True)
+                st.image(result_img, caption="Result Image", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -56,8 +58,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 gray_img = advanced_processor.process_grayscale_conversion(image_data)
-                st.image(image_data, caption="Original Image", use_container_width=True)
-                st.image(gray_img, caption="Grayscale Image", use_container_width=True)
+                st.image(image_data, caption="Original Image", use_column_width=True)
+                st.image(gray_img, caption="Grayscale Image", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -68,9 +70,9 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 grayscale_hist, color_hist = advanced_processor.process_histogram_generation(image_data)
-                st.image(image_data, caption="Uploaded Image", use_container_width=True)
-                st.image(grayscale_hist, caption="Grayscale Histogram", use_container_width=True)
-                st.image(color_hist, caption="Color Histogram", use_container_width=True)
+                st.image(image_data, caption="Uploaded Image", use_column_width=True)
+                st.image(grayscale_hist, caption="Grayscale Histogram", use_column_width=True)
+                st.image(color_hist, caption="Color Histogram", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -81,8 +83,8 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 equalized_img = advanced_processor.process_histogram_equalization(image_data)
-                st.image(image_data, caption="Original Image", use_container_width=True)
-                st.image(equalized_img, caption="Equalized Image", use_container_width=True)
+                st.image(image_data, caption="Original Image", use_column_width=True)
+                st.image(equalized_img, caption="Equalized Image", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -95,9 +97,9 @@ class ImageUI:
                 image_data = uploaded_file.read()
                 ref_image_data = ref_file.read()
                 specified_img = advanced_processor.process_histogram_specification(image_data, ref_image_data)
-                st.image(image_data, caption="Source Image", use_container_width=True)
-                st.image(ref_image_data, caption="Reference Image", use_container_width=True)
-                st.image(specified_img, caption="Specified Image", use_container_width=True)
+                st.image(image_data, caption="Source Image", use_column_width=True)
+                st.image(ref_image_data, caption="Reference Image", use_column_width=True)
+                st.image(specified_img, caption="Specified Image", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
 
@@ -108,12 +110,12 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 mean, std_dev = advanced_processor.process_image_statistics(image_data)
-                st.image(image_data, caption="Uploaded Image", use_container_width=True)
+                st.image(image_data, caption="Uploaded Image", use_column_width=True)
                 st.write(f"Mean Intensity: {mean:.2f}")
                 st.write(f"Standard Deviation: {std_dev:.2f}")
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
-                
+
     def display_task3_frequency_operations(self, frequency_processor):
         st.header("Task 3: Convolution & Frequency Operations")
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="task3_frequency_upload")
@@ -129,7 +131,60 @@ class ImageUI:
             try:
                 image_data = uploaded_file.read()
                 processed_img = frequency_processor.process_frequency_operation(image_data, operation, param)
-                st.image(image_data, caption="Original Image", use_container_width=True)
-                st.image(processed_img, caption="Processed Image", use_container_width=True)
+                st.image(image_data, caption="Original Image", use_column_width=True)
+                st.image(processed_img, caption="Processed Image", use_column_width=True)
             except Exception as e:
                 st.error(f"Error processing image: {str(e)}")
+
+    def display_task4_add_faces(self, face_processor):
+        st.header("Tambah Wajah Baru ke Dataset")
+        new_person = st.text_input("Masukkan nama orang baru:", key="task4_new_person")
+        if st.button("Tambahkan Wajah Baru", key="task4_capture_button"):
+            if not new_person:
+                st.warning("Silakan masukkan nama orang terlebih dahulu.")
+            else:
+                try:
+                    with st.spinner("Mengaktifkan kamera, mohon tunggu..."):
+                        result = face_processor.capture_faces(new_person)
+                    st.success(f"{result['count']} gambar telah ditambahkan ke dataset '{new_person}'.")
+
+                    st.markdown("### Preview Gambar yang Ditambahkan:")
+                    cols = st.columns(len(result['images']))
+                    for i, img_path in enumerate(result['images']):
+                        with cols[i]:
+                            st.image(img_path, caption=f"Gambar {i+1}", width=200)
+
+                except ValueError as e:
+                    st.error(str(e))
+                except Exception as e:
+                    st.error(f"Error capturing faces: {str(e)}")
+
+    def display_task4_process_dataset(self, face_processor):
+        st.header("Proses Gambar dari Dataset")
+        dataset_names = face_processor.get_dataset_names()
+
+        if not dataset_names:
+            st.info("Belum ada data di folder dataset.")
+            return
+
+        selected_person = st.selectbox("Pilih nama orang:", dataset_names, key="task4_select_person")
+        process_option = st.selectbox(
+            "Pilih opsi pemrosesan:",
+            ["Tambah Noise Salt and Pepper", "Hilangkan Noise", "Tajamkan Gambar"],
+            key="task4_process_option"
+        )
+
+        if st.button("Proses Semua Gambar", key="task4_process_button"):
+            try:
+                with st.spinner("Memproses semua gambar..."):
+                    processed_images = face_processor.process_dataset_images(selected_person, process_option)
+                st.success(f"Semua gambar {selected_person} telah diproses ({process_option}) dan disimpan.")
+
+                st.markdown("### Preview Gambar Hasil:")
+                cols = st.columns(len(processed_images))
+                for i, img_path in enumerate(processed_images):
+                    with cols[i]:
+                        st.image(img_path, caption=f"Hasil {i+1}", width=200)
+
+            except Exception as e:
+                st.error(f"Error processing dataset: {str(e)}")

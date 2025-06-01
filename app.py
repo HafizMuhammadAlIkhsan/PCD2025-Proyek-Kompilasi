@@ -3,6 +3,7 @@ from modules.ui.image_ui import ImageUI
 from modules.processing.rgb_processor import RGBProcessor
 from modules.processing.advanced_image_processor import AdvancedImageProcessor
 from modules.processing.frequency_processor import FrequencyProcessor
+from modules.processing.face_processor import FaceProcessor
 
 class StreamlitApp:
     def __init__(self):
@@ -15,12 +16,15 @@ class StreamlitApp:
             "Task 2: Histogram Equalization": self.run_task2_histogram_equalization,
             "Task 2: Histogram Specification": self.run_task2_histogram_specification,
             "Task 2: Image Statistics": self.run_task2_image_statistics,
-            "Task 3: Convolution & Frequency Operations": self.run_task3_frequency_operations
+            "Task 3: Convolution & Frequency Operations": self.run_task3_frequency_operations,
+            "Task 4: Add Faces to Dataset": self.run_task4_add_faces,
+            "Task 4: Process Dataset Images": self.run_task4_process_dataset
         }
         self.image_ui = ImageUI()
         self.rgb_processor = RGBProcessor()
         self.advanced_processor = AdvancedImageProcessor()
         self.frequency_processor = FrequencyProcessor()
+        self.face_processor = FaceProcessor()
 
     def run_task1_rgb_split(self):
         self.image_ui.display_task1_rgb_split(self.rgb_processor)
@@ -48,6 +52,12 @@ class StreamlitApp:
 
     def run_task3_frequency_operations(self):
         self.image_ui.display_task3_frequency_operations(self.frequency_processor)
+
+    def run_task4_add_faces(self):
+        self.image_ui.display_task4_add_faces(self.face_processor)
+
+    def run_task4_process_dataset(self):
+        self.image_ui.display_task4_process_dataset(self.face_processor)
 
     def run(self):
         st.sidebar.title("Navigation")
