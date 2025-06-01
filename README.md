@@ -307,9 +307,3 @@ Jika mengalami masalah, coba solusi berikut:
 - **Plot atau gambar tidak muncul**:
   - Refresh halaman browser.
   - Pastikan `matplotlib` dan `opencv-python` terinstal.
-
-Jika masalah berlanjut, hubungi pengembang.
-
-## Penutup
-
-Terima kasih telah menggunakan aplikasi pengolahan citra ini! Panduan ini diharapkan memudahkan Anda menjelajahi semua fitur dari Tugas 1 hingga Tugas 7. Untuk pertanyaan lebih lanjut, silakan akses halaman dokumentasi di aplikasi atau hubungi tim pengembang.
