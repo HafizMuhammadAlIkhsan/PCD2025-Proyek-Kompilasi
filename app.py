@@ -5,6 +5,7 @@ from modules.processing.advanced_image_processor import AdvancedImageProcessor
 from modules.processing.frequency_processor import FrequencyProcessor
 from modules.processing.face_processor import FaceProcessor
 from modules.processing.shape_processor import ShapeProcessor
+from modules.processing.compression_processor import CompressionProcessor
 
 class StreamlitApp:
     def __init__(self):
@@ -23,7 +24,9 @@ class StreamlitApp:
             "Task 5: Freeman Chain Code": self.run_task5_freeman_chain_code,
             "Task 5: Canny Edge Detection": self.run_task5_canny_edge_detection,
             "Task 5: Integral Projection (Default)": self.run_task5_integral_projection_default,
-            "Task 5: Integral Projection (Otsu)": self.run_task5_integral_projection_otsu
+            "Task 5: Integral Projection (Otsu)": self.run_task5_integral_projection_otsu,
+            "Task 6: JPEG Compression": self.run_task6_jpeg_compression,
+            "Task 6: PNG Compression": self.run_task6_png_compression
         }
         self.image_ui = ImageUI()
         self.rgb_processor = RGBProcessor()
@@ -31,6 +34,7 @@ class StreamlitApp:
         self.frequency_processor = FrequencyProcessor()
         self.face_processor = FaceProcessor()
         self.shape_processor = ShapeProcessor()
+        self.compression_processor = CompressionProcessor()
 
     def run_task1_rgb_split(self):
         self.image_ui.display_task1_rgb_split(self.rgb_processor)
@@ -76,6 +80,12 @@ class StreamlitApp:
 
     def run_task5_integral_projection_otsu(self):
         self.image_ui.display_task5_integral_projection_otsu(self.shape_processor)
+
+    def run_task6_jpeg_compression(self):
+        self.image_ui.display_task6_jpeg_compression(self.compression_processor)
+
+    def run_task6_png_compression(self):
+        self.image_ui.display_task6_png_compression(self.compression_processor)
 
     def run(self):
         st.sidebar.title("Navigation")

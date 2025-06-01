@@ -260,3 +260,41 @@ class ImageUI:
                     st.error(f"Error processing image: {str(e)}")
         else:
             st.info("Silakan unggah citra untuk analisis Proyeksi Integral dengan Otsu.")
+            
+    def display_task6_jpeg_compression(self, compression_processor):
+        st.header("Task 6: JPEG Compression Analysis")
+        uploaded_file = st.file_uploader("Choose an image (PNG/JPG)", type=["png", "jpg", "jpeg"], key="task6_jpeg_upload")
+        if uploaded_file is not None:
+            with st.spinner("Processing JPEG compression..."):
+                try:
+                    image_comparison, metrics_plot, sizes_plot, results_df = compression_processor.compress_jpeg(uploaded_file)
+                    st.subheader("Image Comparison")
+                    st.pyplot(image_comparison)
+                    st.subheader("JPEG Quality vs. File Size")
+                    st.pyplot(sizes_plot)
+                    st.subheader("JPEG Quality vs. PSNR and SSIM")
+                    st.pyplot(metrics_plot)
+                    st.subheader("Compression Metrics")
+                    st.dataframe(results_df, use_container_width=True)
+                except Exception as e:
+                    st.error(f"Error processing JPEG compression: {str(e)}")
+        else:
+            st.info("Please upload an image for JPEG compression analysis.")
+
+    def display_task6_png_compression(self, compression_processor):
+        st.header("Task 6: PNG Compression Analysis")
+        uploaded_file = st.file_uploader("Choose an image (PNG/JPG)", type=["png", "jpg", "jpeg"], key="task6_png_upload")
+        if uploaded_file is not None:
+            with st.spinner("Processing PNG compression..."):
+                try:
+                    image_comparison, sizes_plot, results_df = compression_processor.compress_png(uploaded_file)
+                    st.subheader("Image Comparison")
+                    st.pyplot(image_comparison)
+                    st.subheader("File Size Comparison")
+                    st.pyplot(sizes_plot)
+                    st.subheader("Compression Metrics")
+                    st.dataframe(results_df, use_container_width=True)
+                except Exception as e:
+                    st.error(f"Error processing PNG compression: {str(e)}")
+        else:
+            st.info("Please upload an image for PNG compression analysis.")
