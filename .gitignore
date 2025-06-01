@@ -195,3 +195,4 @@ cython_debug/
 
 # Folder data dan isinya
 data/
+output/
