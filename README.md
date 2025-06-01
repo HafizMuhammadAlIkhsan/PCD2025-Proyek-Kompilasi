@@ -46,7 +46,7 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
    - Folder `output/compressed/` dan `output/ssim/` akan menyimpan hasil kompresi.
 
 3. **Menjalankan Aplikasi**:
-   - Buka terminal di folder `image_processing_app`.
+   - Buka terminal di folder `PCD2025-Proyek-Kompilasi`.
    - Jalankan perintah:
      ```
      streamlit run app.py
