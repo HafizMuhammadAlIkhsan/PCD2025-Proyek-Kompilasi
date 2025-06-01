@@ -291,7 +291,7 @@ Jika mengalami masalah, coba solusi berikut:
 - **Aplikasi tidak berjalan**:
   - Pastikan semua library terinstal (`pip install -r requirements.txt`).
   - Periksa struktur folder proyek.
-  - Jalankan `streamlit run app.py` dari folder `image_processing_app`.
+  - Jalankan `streamlit run app.py` dari direktori proyek (hasil kloning repository).
 
 - **Error saat mengunggah gambar**:
   - Pastikan format gambar adalah JPG, JPEG, atau PNG.
