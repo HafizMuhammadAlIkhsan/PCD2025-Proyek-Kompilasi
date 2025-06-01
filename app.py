@@ -7,11 +7,12 @@ from modules.processing.face_processor import FaceProcessor
 from modules.processing.shape_processor import ShapeProcessor
 from modules.processing.compression_processor import CompressionProcessor
 from modules.processing.cbir_processor import CbirProcessor
+import re
 
 class StreamlitApp:
     def __init__(self):
         self.features = {
-            "Task 1: Image Upload & RGB Split": self.run_task1_rgb_split,
+            "Task 1: RGB Split": self.run_task1_rgb_split,
             "Task 2: Arithmetic Operations": self.run_task2_arithmetic_operations,
             "Task 2: Logic Operations": self.run_task2_logic_operations,
             "Task 2: Grayscale Conversion": self.run_task2_grayscale_conversion,
@@ -101,10 +102,31 @@ class StreamlitApp:
     def run_task7_texture_analysis(self):
         self.image_ui.display_task7_texture_analysis(self.cbir_processor)
 
+    def display_documentation(self):
+        st.header("Dokumentasi Aplikasi")
+        try:
+            with open("README.md", "r", encoding="utf-8") as f:
+                readme_content = f.read()
+            sections = re.split(r'^## Tugas \d+ - .+$', readme_content, flags=re.MULTILINE)[1:]
+            titles = re.findall(r'^## (Tugas \d+ - .+)$', readme_content, flags=re.MULTILINE)
+            for title, content in zip(titles, sections):
+                with st.expander(title):
+                    st.markdown(content.strip())
+        except FileNotFoundError:
+            st.error("File README.md tidak ditemukan. Pastikan file ada di folder proyek.")
+        except Exception as e:
+            st.error(f"Error membaca dokumentasi: {str(e)}")
+
     def run(self):
-        st.sidebar.title("Navigation")
-        feature = st.sidebar.selectbox("Select Task", list(self.features.keys()))
-        self.features[feature]()
+        st.title("Aplikasi Pengolahan Citra")
+        st.sidebar.title("Navigasi")
+        navigation_options = ["📘 Dokumentasi"] + list(self.features.keys())
+        selected = st.sidebar.selectbox("Pilih Halaman", navigation_options)
+
+        if selected == "📘 Dokumentasi":
+            self.display_documentation()
+        else:
+            self.features[selected]()
 
 if __name__ == "__main__":
     app = StreamlitApp()
