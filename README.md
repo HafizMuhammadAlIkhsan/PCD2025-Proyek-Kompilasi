@@ -9,12 +9,12 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
 1. **Instalasi Python dan Library**:
    - Pastikan Python 3.12 atau lebih baru terinstal.
    - Instal library yang diperlukan dengan perintah:
-     ```
+     ```bash
      pip install streamlit numpy opencv-python matplotlib pillow scikit-image scikit-learn pandas
      ```
      atau menggunakan file `requirements.txt`:
 
-     ```
+     ```bash
      pip install -r requirements.txt
      ```
 
