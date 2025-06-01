@@ -4,6 +4,7 @@ from modules.processing.rgb_processor import RGBProcessor
 from modules.processing.advanced_image_processor import AdvancedImageProcessor
 from modules.processing.frequency_processor import FrequencyProcessor
 from modules.processing.face_processor import FaceProcessor
+from modules.processing.shape_processor import ShapeProcessor
 
 class StreamlitApp:
     def __init__(self):
@@ -18,13 +19,18 @@ class StreamlitApp:
             "Task 2: Image Statistics": self.run_task2_image_statistics,
             "Task 3: Convolution & Frequency Operations": self.run_task3_frequency_operations,
             "Task 4: Add Faces to Dataset": self.run_task4_add_faces,
-            "Task 4: Process Dataset Images": self.run_task4_process_dataset
+            "Task 4: Process Dataset Images": self.run_task4_process_dataset,
+            "Task 5: Freeman Chain Code": self.run_task5_freeman_chain_code,
+            "Task 5: Canny Edge Detection": self.run_task5_canny_edge_detection,
+            "Task 5: Integral Projection (Default)": self.run_task5_integral_projection_default,
+            "Task 5: Integral Projection (Otsu)": self.run_task5_integral_projection_otsu
         }
         self.image_ui = ImageUI()
         self.rgb_processor = RGBProcessor()
         self.advanced_processor = AdvancedImageProcessor()
         self.frequency_processor = FrequencyProcessor()
         self.face_processor = FaceProcessor()
+        self.shape_processor = ShapeProcessor()
 
     def run_task1_rgb_split(self):
         self.image_ui.display_task1_rgb_split(self.rgb_processor)
@@ -58,6 +64,18 @@ class StreamlitApp:
 
     def run_task4_process_dataset(self):
         self.image_ui.display_task4_process_dataset(self.face_processor)
+
+    def run_task5_freeman_chain_code(self):
+        self.image_ui.display_task5_freeman_chain_code(self.shape_processor)
+
+    def run_task5_canny_edge_detection(self):
+        self.image_ui.display_task5_canny_edge_detection(self.shape_processor)
+
+    def run_task5_integral_projection_default(self):
+        self.image_ui.display_task5_integral_projection_default(self.shape_processor)
+
+    def run_task5_integral_projection_otsu(self):
+        self.image_ui.display_task5_integral_projection_otsu(self.shape_processor)
 
     def run(self):
         st.sidebar.title("Navigation")

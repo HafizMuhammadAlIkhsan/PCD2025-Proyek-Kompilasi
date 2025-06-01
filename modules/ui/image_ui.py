@@ -188,3 +188,75 @@ class ImageUI:
 
             except Exception as e:
                 st.error(f"Error processing dataset: {str(e)}")
+
+    def display_task5_freeman_chain_code(self, shape_processor):
+        st.header("Task 5: Freeman Chain Code")
+        uploaded_file = st.file_uploader("Pilih citra (PNG/JPG)", type=["png", "jpg", "jpeg"], key="task5_freeman_upload")
+        threshold_value = st.slider("Nilai Threshold Binarisasi", 0, 255, 127, key="task5_freeman_threshold")
+        if uploaded_file is not None:
+            with st.spinner("Memproses Kode Rantai Freeman..."):
+                try:
+                    fig, chain_code_str = shape_processor.process_freeman_chain_code(uploaded_file, threshold_value)
+                    if fig is not None:
+                        st.pyplot(fig)
+                        st.subheader("Detail Kode Rantai")
+                        st.text(chain_code_str)
+                    else:
+                        st.error(chain_code_str)
+                except Exception as e:
+                    st.error(f"Error processing image: {str(e)}")
+        else:
+            st.info("Silakan unggah citra untuk analisis Freeman Chain Code.")
+
+    def display_task5_canny_edge_detection(self, shape_processor):
+        st.header("Task 5: Canny Edge Detection")
+        uploaded_file = st.file_uploader("Pilih citra (PNG/JPG)", type=["png", "jpg", "jpeg"], key="task5_canny_upload")
+        low_threshold = st.slider("Low Threshold", 0, 255, 50, key="task5_canny_low")
+        high_threshold = st.slider("High Threshold", 0, 255, 150, key="task5_canny_high")
+        if uploaded_file is not None:
+            with st.spinner("Memproses Deteksi Tepi Canny..."):
+                try:
+                    fig, error_msg = shape_processor.process_canny_edge(uploaded_file, low_threshold, high_threshold)
+                    if fig is not None:
+                        st.pyplot(fig)
+                    else:
+                        st.error(error_msg)
+                except Exception as e:
+                    st.error(f"Error processing image: {str(e)}")
+        else:
+            st.info("Silakan unggah citra untuk analisis Canny Edge Detection.")
+
+    def display_task5_integral_projection_default(self, shape_processor):
+        st.header("Task 5: Integral Projection (Default)")
+        use_default_image = st.checkbox("Gunakan Citra Teks Default", value=True, key="task5_default_image")
+        uploaded_file = None
+        if not use_default_image:
+            uploaded_file = st.file_uploader("Pilih citra (PNG/JPG)", type=["png", "jpg", "jpeg"], key="task5_integral_default_upload")
+        if use_default_image or uploaded_file is not None:
+            with st.spinner("Memproses Proyeksi Integral..."):
+                try:
+                    fig, error_msg = shape_processor.process_integral_projection_default(uploaded_file)
+                    if fig is not None:
+                        st.pyplot(fig)
+                    else:
+                        st.error(error_msg)
+                except Exception as e:
+                    st.error(f"Error processing image: {str(e)}")
+        else:
+            st.info("Silakan unggah citra atau centang 'Gunakan Citra Teks Default' untuk analisis.")
+
+    def display_task5_integral_projection_otsu(self, shape_processor):
+        st.header("Task 5: Integral Projection (Otsu)")
+        uploaded_file = st.file_uploader("Pilih citra (PNG/JPG)", type=["png", "jpg", "jpeg"], key="task5_integral_otsu_upload")
+        if uploaded_file is not None:
+            with st.spinner("Memproses Proyeksi Integral dengan Otsu..."):
+                try:
+                    fig, error_msg = shape_processor.process_integral_projection_otsu(uploaded_file)
+                    if fig is not None:
+                        st.pyplot(fig)
+                    else:
+                        st.error(error_msg)
+                except Exception as e:
+                    st.error(f"Error processing image: {str(e)}")
+        else:
+            st.info("Silakan unggah citra untuk analisis Proyeksi Integral dengan Otsu.")
