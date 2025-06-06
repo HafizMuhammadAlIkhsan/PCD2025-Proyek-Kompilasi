@@ -31,9 +31,9 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
      PCD2025-Proyek-Kompilasi/
      ├── app.py
      ├── data/
-     │   ├── cbir_dataset/
-     │   ├── dataset/
-     │   └── processed_dataset/
+     │   ├── cbir_dataset/        # Isi dengan gambar untuk CBIR
+     │   ├── dataset/             # Untuk dataset wajah
+     │   └── processed_dataset/   # Hasil proses wajah
      ├── modules/
      │   ├── ui/
      │   │   └── image_ui.py
@@ -46,10 +46,9 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
      │       ├── compression_processor.py
      │       └── cbir_processor.py
      ├── output/
-     │   ├── compressed/
-     │   └── ssim/
+     │   ├── compressed/          # Hasil kompresi
+     │   └── ssim/                # Hasil metrik SSIM
      ```
-
    - Folder `data/cbir_dataset/` harus berisi gambar dengan nama seperti `kategori_nomor.jpg` (contoh: `forest_001.jpg`).
    - Folder `output/compressed/` dan `output/ssim/` akan menyimpan hasil kompresi.
 
