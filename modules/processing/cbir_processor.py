@@ -40,12 +40,13 @@ class CbirProcessor:
                 image = cv2.imread(path)
                 if image is not None:
                     dataset.append(image)
-                    labels.append(filename.split("_")[0])
+                    label = os.path.splitext(filename)[0]
+                    labels.append(label)
                     filenames.append(path)
         return dataset, labels, filenames
 
-    def process_cbir(self, uploaded_file, mode):
-        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    def process_cbir(self, file_bytes , mode):
+        file_bytes = np.asarray(bytearray(file_bytes), dtype=np.uint8)
         query_img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
         query_img_rgb = cv2.cvtColor(query_img, cv2.COLOR_BGR2RGB)
 
@@ -73,8 +74,8 @@ class CbirProcessor:
         max_k = min(len(db_features), 10)
         return query_img_rgb, similar_images, None, max_k
 
-    def predict_cbir_knn(self, uploaded_file, mode, k):
-        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    def predict_cbir_knn(self, file_bytes , mode, k):
+        file_bytes = np.asarray(bytearray(file_bytes), dtype=np.uint8)
         query_img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
         db_images, db_labels, _ = self._load_dataset()

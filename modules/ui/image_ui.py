@@ -8,7 +8,7 @@ import time
 
 class ImageUI:
     def display_task1_rgb_split(self, rgb_processor):
-        st.header("Task 1: Image Upload & RGB Split")
+        st.header("Task 1: RGB Split")
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], key="task1_rgb_upload")
         if uploaded_file is not None:
             try:
@@ -304,18 +304,19 @@ class ImageUI:
         uploaded_file = st.file_uploader("Upload Query Image", type=["jpg", "jpeg", "png"], key="task7_cbir_upload")
         mode = st.radio("Select Feature Type", ["Color", "Texture", "Combined"], key="task7_cbir_mode")
         if uploaded_file is not None:
+            file_bytes = uploaded_file.read()
             with st.spinner("Processing CBIR..."):
                 try:
-                    query_image, similar_images, knn_prediction, max_k = cbir_processor.process_cbir(uploaded_file, mode)
-                    st.image(query_image, caption="Query Image", use_column_width=True)
+                    query_image, similar_images, knn_prediction, max_k = cbir_processor.process_cbir(file_bytes, mode)
+                    st.image(query_image, caption="Query Image", use_container_width=True)
                     st.subheader("Most Similar Images")
                     cols = st.columns(3)
                     for i, (img, label, score) in enumerate(similar_images[:6]):
                         with cols[i % 3]:
-                            st.image(img, caption=f"{label} - Score: {score:.2f}", use_column_width=True)
+                            st.image(img, caption=f"{label} - Score: {score:.2f}", use_container_width=True)
                     st.subheader("k-NN Prediction")
                     k = st.slider("Number of Neighbors (k)", 1, max_k, min(3, max_k), key="task7_cbir_k")
-                    prediction = cbir_processor.predict_cbir_knn(uploaded_file, mode, k)
+                    prediction = cbir_processor.predict_cbir_knn(file_bytes, mode, k)
                     st.success(f"Predicted Label: {prediction}")
                 except Exception as e:
                     st.error(f"Error processing CBIR: {str(e)}")
@@ -332,22 +333,22 @@ class ImageUI:
                      image_ycbcr, fig_ycbcr, image_hsv, fig_hsv, image_yiq,
                      fig_yiq, fig_lum) = cbir_processor.process_color_space_analysis(uploaded_file)
                     st.subheader("RGB Color Space")
-                    st.image(image_rgb, caption="Original RGB Image", use_column_width=True)
+                    st.image(image_rgb, caption="Original RGB Image", use_container_width=True)
                     st.pyplot(fig_rgb)
                     st.subheader("XYZ Color Space")
-                    st.image(image_xyz, caption="XYZ Image", use_column_width=True)
+                    st.image(image_xyz, caption="XYZ Image", use_container_width=True)
                     st.pyplot(fig_xyz)
                     st.subheader("Lab Color Space")
-                    st.image(image_lab, caption="Lab Image", use_column_width=True)
+                    st.image(image_lab, caption="Lab Image", use_container_width=True)
                     st.pyplot(fig_lab)
                     st.subheader("YCbCr Color Space")
-                    st.image(image_ycbcr, caption="YCbCr Image", use_column_width=True)
+                    st.image(image_ycbcr, caption="YCbCr Image", use_container_width=True)
                     st.pyplot(fig_ycbcr)
                     st.subheader("HSV Color Space")
-                    st.image(image_hsv, caption="HSV Image", use_column_width=True)
+                    st.image(image_hsv, caption="HSV Image", use_container_width=True)
                     st.pyplot(fig_hsv)
                     st.subheader("YIQ Color Space")
-                    st.image(image_yiq, caption="YIQ Image", use_column_width=True, clamp=True)
+                    st.image(image_yiq, caption="YIQ Image", use_container_width=True, clamp=True)
                     st.pyplot(fig_yiq)
                     st.subheader("Luminance Components Comparison")
                     st.pyplot(fig_lum)
