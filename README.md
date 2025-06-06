@@ -8,7 +8,19 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
 
 1. **Instalasi Python dan Library**:
    - Pastikan Python 3.12 atau lebih baru terinstal.
-   - Instal library yang diperlukan dengan perintah:
+   - **(Opsional) Gunakan Virtual Environment (venv)**:  
+     Disarankan menggunakan *virtual environment* agar dependensi terisolasi dari sistem utama.  
+     Jalankan perintah berikut di terminal:
+     ```bash
+     python -m venv venv
+     source venv/bin/activate        # Untuk Linux/MacOS
+     .\venv\Scripts\activate         # Untuk Windows
+     ```
+     Setelah aktif, instal library yang dibutuhkan:
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - Jika tidak menggunakan virtual environment, cukup jalankan:
      ```bash
      pip install -r requirements.txt
      ```
@@ -19,9 +31,9 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
      PCD2025-Proyek-Kompilasi/
      ├── app.py
      ├── data/
-     │   ├── cbir_dataset/        # Isi dengan gambar untuk CBIR
-     │   ├── dataset/             # Untuk dataset wajah
-     │   └── processed_dataset/   # Hasil proses wajah
+     │   ├── cbir_dataset/
+     │   ├── dataset/
+     │   └── processed_dataset/
      ├── modules/
      │   ├── ui/
      │   │   └── image_ui.py
@@ -34,16 +46,17 @@ Sebelum menggunakan aplikasi, lakukan persiapan berikut:
      │       ├── compression_processor.py
      │       └── cbir_processor.py
      ├── output/
-     │   ├── compressed/          # Hasil kompresi
-     │   └── ssim/                # Hasil metrik SSIM
+     │   ├── compressed/
+     │   └── ssim/
      ```
+
    - Folder `data/cbir_dataset/` harus berisi gambar dengan nama seperti `kategori_nomor.jpg` (contoh: `forest_001.jpg`).
    - Folder `output/compressed/` dan `output/ssim/` akan menyimpan hasil kompresi.
 
 3. **Menjalankan Aplikasi**:
    - Buka terminal di folder `PCD2025-Proyek-Kompilasi`.
    - Jalankan perintah:
-     ```
+     ```bash
      streamlit run app.py
      ```
    - Buka browser di `http://localhost:8501`.
