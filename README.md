@@ -73,8 +73,6 @@ Berikut adalah panduan penggunaan untuk setiap fitur, dikelompokkan berdasarkan 
 4. Lihat tiga gambar terpisah yang menunjukkan kanal Red, Green, dan Blue.
 5. Gulir ke bawah untuk melihat data array RGB dalam format JSON.
 
-**Catatan**: Gunakan gambar berwarna untuk hasil terbaik.
-
 ## Tugas 2 - Arithmetic Operations
 **Deskripsi**: Melakukan operasi penjumlahan, pengurangan, maksimum, minimum, atau invers pada gambar.
 
@@ -155,8 +153,6 @@ Berikut adalah panduan penggunaan untuk setiap fitur, dikelompokkan berdasarkan 
 4. Klik tombol **Process**.
 5. Lihat gambar asli dan hasil operasi.
 
-**Catatan**: Operasi frekuensi mungkin lambat untuk gambar besar.
-
 ## Tugas 4 - Add Faces to Dataset
 **Deskripsi**: Mengambil gambar wajah menggunakan kamera web dan menyimpannya ke dataset.
 
@@ -217,8 +213,6 @@ Berikut adalah panduan penggunaan untuk setiap fitur, dikelompokkan berdasarkan 
 2. Unggah gambar.
 3. Lihat plot proyeksi integral.
 
-**Catatan**: Gambar dengan teks atau pola jelas menghasilkan proyeksi terbaik.
-
 ## Tugas 6 - JPEG Compression
 **Deskripsi**: Menganalisis kompresi JPEG dengan berbagai kualitas, termasuk ukuran file, PSNR, dan SSIM.
 
@@ -255,7 +249,7 @@ Berikut adalah panduan penggunaan untuk setiap fitur, dikelompokkan berdasarkan 
 5. Atur jumlah tetangga (k) untuk prediksi k-NN.
 6. Lihat label prediksi.
 
-**Catatan**: Pastikan `data/cbir_dataset/` berisi gambar dengan nama seperti `forest_001.jpg`.
+**Catatan**: Pastikan `data/cbir_dataset/` berisi gambar.
 
 ## Tugas 7 - Color Space Analysis
 **Deskripsi**: Menganalisis gambar dalam ruang warna RGB, XYZ, Lab, YCbCr, HSV, dan YIQ, serta membandingkan komponen luminansi.
@@ -281,8 +275,6 @@ Berikut adalah panduan penggunaan untuk setiap fitur, dikelompokkan berdasarkan 
    - Peta dan histogram LBP.
    - Hasil filter Gabor.
    - Peta energi tekstur Law.
-
-**Catatan**: Gunakan gambar dengan tekstur jelas untuk hasil terbaik.
 
 ## Troubleshooting
 
