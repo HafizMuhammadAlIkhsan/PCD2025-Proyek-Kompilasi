@@ -285,7 +285,7 @@ Jika mengalami masalah, coba solusi berikut:
   - Coba gambar dengan ukuran lebih kecil.
 
 - **CBIR tidak menampilkan hasil**:
-  - Pastikan folder `data/cbir_dataset/` berisi gambar dengan format nama yang benar.
+  - Pastikan folder `data/cbir_dataset/` berisi gambar.
 
 - **Kamera web tidak berfungsi (Tugas 4)**:
   - Periksa koneksi kamera web dan izinkan akses di browser.
